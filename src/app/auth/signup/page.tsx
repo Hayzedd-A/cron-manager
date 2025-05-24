@@ -45,7 +45,7 @@ export default function RegisterPage() {
           router.push(`/auth/verify-otp?email=${encodeURIComponent(email)}`);
         }, 1500); // Short delay to show success message
       }
-    } catch (error: any) {
+    } catch (error) {
       console.log("Error in sign up page", error);
       toast.error("Something went wrong. Please try again.");
     } finally {

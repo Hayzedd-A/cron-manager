@@ -9,13 +9,13 @@ const sendEmail = async (email: string, text: string, subject: string) => {
 }
 
 export const sendOtpEmail = async(reciever: string, otp: string) => {
-  let content = `Your OTP code is: ${otp}. It expires in 30 minutes.`
-  let subject = "Your OTP Code for Signup Verification";
+  const content = `Your OTP code is: ${otp}. It expires in 30 minutes.`
+  const subject = "Your OTP Code for Signup Verification";
   return await sendEmail(reciever, content, subject)
 }
 
 export const sendForgetPasswordEmail = async (reciever: string, otp: string) => {
-  let content = `Your OTP code is: ${otp}. It expires in 30 minutes.`;
-  let subject = "Your OTP Code for password recovery";
+  const content = `Your OTP code is: ${otp}. It expires in 30 minutes.`;
+  const subject = "Your OTP Code for password recovery";
   return await sendEmail(reciever, content, subject);
 };

@@ -1,29 +1,37 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI as string; // Your full connection string
+const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+  throw new Error(
+    "Please define the MONGODB_URI environment variable in .env.local"
+  );
+}
+
 const options = {};
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
+// Extend the global type to avoid "no-var" and TypeScript errors
 declare global {
-  // Avoid polluting the global namespace in production
-  var _mongoClientPromise: Promise<MongoClient>;
+  namespace NodeJS {
+    interface Global {
+      _mongoClientPromise?: Promise<MongoClient>;
+    }
+  }
 }
 
-if (!process.env.MONGODB_URI) {
-  throw new Error("Please add your MONGODB_URI to .env.local");
-}
+// Use the global object safely
+const globalWithMongo = global as typeof globalThis & NodeJS.Global;
 
 if (process.env.NODE_ENV === "development") {
-  // In development, use a global variable so it’s not re-created on every reload
-  if (!global._mongoClientPromise) {
+  if (!globalWithMongo._mongoClientPromise) {
     client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
+    globalWithMongo._mongoClientPromise = client.connect();
   }
-  clientPromise = global._mongoClientPromise;
+  clientPromise = globalWithMongo._mongoClientPromise;
 } else {
-  // In production, create a new client
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }

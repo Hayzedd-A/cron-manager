@@ -64,7 +64,7 @@ export default function VerifyOtpPage() {
         toast.success("Email verified! Redirecting to login...");
         setTimeout(() => router.push("/auth/signin"), 2000);
       }
-    } catch (error: any) {
+    } catch (error) {
       console.log("Error in verify OTP", error);
       toast.error("Something went wrong. Please try again.");
     } finally {
@@ -112,7 +112,7 @@ export default function VerifyOtpPage() {
             Verify Your Email
           </h1>
           <p className="mt-2 text-sm text-gray-600">
-            We've sent a verification code to your email
+            We&apos;ve sent a verification code to your email
           </p>
           <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100">
             <Mail className="h-4 w-4 mr-2 text-gray-500" />
@@ -188,7 +188,7 @@ export default function VerifyOtpPage() {
 
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
-            Didn't receive the code?{" "}
+            Didn&apos;t receive the code?{" "}
             <button
               type="button"
               onClick={handleResendOTP}
