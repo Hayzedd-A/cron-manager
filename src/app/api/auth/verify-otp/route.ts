@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 import { response } from "@/app/config/helpers";
 
 export async function POST(
-  req: NextRequest,
+  req: NextRequest
 ) {
   try {
   if (req.method !== "POST") return response({ error: "Invalid route" }, 404);
