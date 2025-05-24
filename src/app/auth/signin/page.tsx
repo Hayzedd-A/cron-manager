@@ -1,15 +1,16 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useRef, Suspense } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { Eye, EyeOff, Loader2, Mail, Lock, ArrowRight, X } from "lucide-react";
 import Link from "next/link";
 
-export default function SignInPage() {
+function InnerSignInPage() {
   const router = useRouter();
-  const callbackUrl = "/";
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -475,3 +476,10 @@ export default function SignInPage() {
   );
 }
 
+export default function SignInPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InnerSignInPage />
+    </Suspense>
+  );
+}

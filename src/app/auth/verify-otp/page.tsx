@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast, Toaster } from "react-hot-toast";
 import { Loader2, Mail, KeyRound } from "lucide-react";
 import Link from "next/link";
 
-export default function VerifyOtpPage() {
+function InnerVerifyOtpPage() {
   const router = useRouter();
   const params = useSearchParams();
   const email = params.get("email") || "";
@@ -210,5 +210,13 @@ export default function VerifyOtpPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function VerifyOtpPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InnerVerifyOtpPage />
+    </Suspense>
   );
 }
