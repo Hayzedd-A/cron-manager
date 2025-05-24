@@ -5,12 +5,12 @@ import { connectToDatabase } from "@/lib/db";
 import {
   sendForgetPasswordEmail,
 } from "@/app/services/email.serivce";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { response } from "@/app/config/helpers";
 
-export async function POST(req: NextRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
   try {
-    if (req.method !== "POST") return res.status(405).end();
+    if (req.method !== "POST") return response({ error: "Invalid route" }, 404);
     const { email } = await req.json();
     if (!email) return response({ error: "You need to send your email" }, 400);
 
