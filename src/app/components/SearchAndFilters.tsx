@@ -1,12 +1,13 @@
+import { FilterBy, SortBy } from "../pages/Dashboard";
 import { SearchIcon, FilterIcon } from "./Icons";
 
 interface SearchAndFiltersProps {
   searchTerm: string;
   onSearchChange: (term: string) => void;
   sortBy: string;
-  onSortChange: (sort: string) => void;
+  onSortChange: (sort: SortBy) => void;
   filterBy: string;
-  onFilterChange: (filter: string) => void;
+  onFilterChange: (filter: FilterBy) => void;
 }
 
 export default function SearchAndFilters({
@@ -17,6 +18,16 @@ export default function SearchAndFilters({
   filterBy,
   onFilterChange,
 }: SearchAndFiltersProps) {
+  const handleSortChange = (value: string) => {
+    if (["name", "status", "createdAt", "lastPing"].includes(value)) {
+      onSortChange(value as SortBy);
+    }
+  };
+  const handleFilterChange = (value: string) => {
+    if (["all", "up", "down", "active", "paused"].includes(value)) {
+      onFilterChange(value as FilterBy);
+    }
+  };
   return (
     <div className="bg-white rounded-xl p-6 mb-6 border border-gray-200">
       <div className="flex flex-col lg:flex-row gap-4">
@@ -37,7 +48,7 @@ export default function SearchAndFilters({
           <label className="text-sm font-medium text-gray-700">Sort by:</label>
           <select
             value={sortBy}
-            onChange={(e) => onSortChange(e.target.value)}
+            onChange={(e) => handleSortChange(e.target.value)}
             className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="name">Name</option>
@@ -53,7 +64,7 @@ export default function SearchAndFilters({
           <label className="text-sm font-medium text-gray-700">Filter:</label>
           <select
             value={filterBy}
-            onChange={(e) => onFilterChange(e.target.value)}
+            onChange={(e) => handleFilterChange(e.target.value)}
             className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="all">All Services</option>
