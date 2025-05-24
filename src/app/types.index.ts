@@ -12,7 +12,7 @@ export interface Service {
   _id: string;
   name: string;
   url: string;
-  query?: Record<string, any>;
+  query?: Record<string, string>;
   active: boolean;
   status: "up" | "down";
   userId: string;
