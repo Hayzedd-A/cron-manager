@@ -2,7 +2,6 @@ import { Service } from "@/app/types.index";
 import {
   PlayIcon,
   PauseIcon,
-  EditIcon,
   TrashIcon,
   ClockIcon,
   GlobeIcon,

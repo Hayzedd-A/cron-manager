@@ -1,11 +1,10 @@
-import { NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
 import { TempUser, User } from "@/models/user";
 import { connectToDatabase } from "@/lib/db";
 import {
   sendForgetPasswordEmail,
 } from "@/app/services/email.serivce";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest} from "next/server";
 import { response } from "@/app/config/helpers";
 
 export async function POST(req: NextRequest) {

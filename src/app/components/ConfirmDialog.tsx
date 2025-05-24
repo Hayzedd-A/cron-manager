@@ -1,5 +1,4 @@
 import { AlertTriangleIcon, TrashIcon, XIcon } from "lucide-react";
-// import { XIcon, TrashIcon } from "./Icons";
 
 interface ConfirmDialogProps {
   open: boolean;

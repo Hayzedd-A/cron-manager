@@ -1,4 +1,3 @@
-import { NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
 import {TempUser, User} from "@/models/user";
 import { connectToDatabase } from "@/lib/db";
