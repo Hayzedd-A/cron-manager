@@ -15,6 +15,7 @@ let clientPromise: Promise<MongoClient>;
 
 // Extend the global type to avoid "no-var" and TypeScript errors
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
     interface Global {
       _mongoClientPromise?: Promise<MongoClient>;

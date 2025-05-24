@@ -51,8 +51,6 @@ export default function ServiceDetailsModal({
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
 
-  if (!open) return null;
-
   // Cache management for service details
   const getCacheKey = (serviceId: string) => `service-details-${serviceId}`;
 
@@ -134,7 +132,8 @@ export default function ServiceDetailsModal({
         const serviceData = await serviceRes.json();
 
         const updatedService: Service = serviceData.service || service;
-        const serviceHistory: ServiceHistories[] = serviceData.service?.history || [];
+        const serviceHistory: ServiceHistories[] =
+          serviceData.service?.history || [];
 
         setServiceData(updatedService);
         setHistory(serviceHistory);
@@ -179,24 +178,25 @@ export default function ServiceDetailsModal({
     onClose();
   };
 
-const formatLastUpdated = (date: Date | string | null | undefined): string => {
-  if (!date) return "Never";
+  const formatLastUpdated = (
+    date: Date | string | null | undefined
+  ): string => {
+    if (!date) return "Never";
 
-  const parsedDate = typeof date === "string" ? new Date(date) : date;
+    const parsedDate = typeof date === "string" ? new Date(date) : date;
 
-  if (isNaN(parsedDate.getTime())) return "Never"; // invalid date check
+    if (isNaN(parsedDate.getTime())) return "Never"; // invalid date check
 
-  const now = new Date();
-  const diff = now.getTime() - parsedDate.getTime();
-  const seconds = Math.floor(diff / 1000);
-  const minutes = Math.floor(seconds / 60);
+    const now = new Date();
+    const diff = now.getTime() - parsedDate.getTime();
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
 
-  if (seconds < 60) return `${seconds}s ago`;
-  if (minutes < 60) return `${minutes}m ago`;
+    if (seconds < 60) return `${seconds}s ago`;
+    if (minutes < 60) return `${minutes}m ago`;
 
-  return parsedDate.toLocaleTimeString();
-};
-
+    return parsedDate.toLocaleTimeString();
+  };
 
   const calculateUptime = () => {
     if (history.length === 0) return 0;
@@ -204,13 +204,13 @@ const formatLastUpdated = (date: Date | string | null | undefined): string => {
     return (upCount / history.length) * 100;
   };
 
-  const getAverageResponseTime = () => {
-    if (history.length === 0) return 0;
-    const validResponses = history.filter((h) => h.responseTime > 0);
-    if (validResponses.length === 0) return 0;
-    const sum = validResponses.reduce((acc, h) => acc + h.responseTime, 0);
-    return sum / validResponses.length;
-  };
+  // const getAverageResponseTime = () => {
+  //   if (history.length === 0) return 0;
+  //   const validResponses = history.filter((h) => h.responseTime > 0);
+  //   if (validResponses.length === 0) return 0;
+  //   const sum = validResponses.reduce((acc, h) => acc + h.responseTime, 0);
+  //   return sum / validResponses.length;
+  // };
 
   // Auto-refresh functionality
   useEffect(() => {
@@ -240,6 +240,8 @@ const formatLastUpdated = (date: Date | string | null | undefined): string => {
       }
     };
   }, [open, service._id]);
+
+  if (!open) return null;
 
   return (
     <>
