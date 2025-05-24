@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { Eye, EyeOff, Loader2, Mail, Lock, ArrowRight, X } from "lucide-react";
@@ -9,8 +9,7 @@ import Link from "next/link";
 
 export default function SignInPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const callbackUrl = "/";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
