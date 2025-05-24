@@ -7,10 +7,9 @@ import { response } from "@/app/config/helpers";
 
 export async function POST(
   req: NextRequest,
-  res: NextApiResponse
 ) {
   try {
-  if (req.method !== "POST") return res.status(405).end();
+  if (req.method !== "POST") return response({ error: "Invalid route" }, 404);
 
   const { email, otp } = await req.json();
   if (!email || !otp) return response({ error: "Missing fields" }, 400);

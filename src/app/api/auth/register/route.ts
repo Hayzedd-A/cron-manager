@@ -6,9 +6,9 @@ import { sendOtpEmail } from "@/app/services/email.serivce";
 import { NextRequest } from "next/server";
 import { response } from "@/app/config/helpers";
 
-export async function POST(req: NextRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
   try {
-    if (req.method !== "POST") return res.status(405).end();
+    if (req.method !== "POST") return response({ error: "Invalid route" }, 404);;
     const { name, email, password } = await req.json();
     if (!name || !email || !password)
       return response({ error: "missing fields" }, 400);
@@ -47,9 +47,9 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
 }
 
 // resend otp
-export async function PATCH(req: NextRequest, res: NextApiResponse) {
+export async function PATCH(req: NextRequest) {
   try {
-    if (req.method !== "PATCH") return res.status(404).end();
+    if (req.method !== "PATCH") return response({ error: "Invalid route" }, 404);
 
     const { email } = await req.json();
     if (!email) {
