@@ -524,7 +524,7 @@ export default function DashboardPage() {
           {/* Add Service Button - Fixed Bottom Left - Only show when authenticated */}
           <button
             onClick={() => setShowAddModal(true)}
-            className="fixed bottom-6 left-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all hover:scale-105"
+            className="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all hover:scale-105 hover:rotate-90"
             title="Add New Service"
           >
             <PlusIcon className="w-6 h-6" />
