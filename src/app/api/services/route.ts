@@ -20,8 +20,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
+    const existingService = await Service.countDocuments({userId: session.user.id})
+    if (existingService >= 5) return NextResponse.json({error: "maximum number of services reached"}, {status: 406})
     const service = await Service.create({
-      userId: session.user.id!,
+      userId: session.user.id,
       name,
       url,
       query,

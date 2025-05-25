@@ -78,14 +78,18 @@ export default function AddServiceModal({
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create service");
+        const error = await response.json();
+        throw new Error(error.error);
       }
 
       resetForm();
       onClose();
     } catch (error) {
-      console.error("Error creating service:", error);
-      setErrors({ submit: "Failed to create service. Please try again." });
+      if (error instanceof Error) {
+        const message = error.message;
+        console.error("Error creating service:", error);
+        setErrors({ submit: message });
+      }
     } finally {
       setLoading(false);
     }
@@ -149,7 +153,8 @@ export default function AddServiceModal({
             />
 
             <p className="text-gray-500 text-xs mt-1">
-              Note: Use a GET endpoint and ensure its not authorized. only success response are recorded as a success
+              Note: Use a GET endpoint and ensure its not authorized. only
+              success response are recorded as a success
             </p>
             {errors.url && (
               <p className="text-red-500 text-sm mt-1">{errors.url}</p>
