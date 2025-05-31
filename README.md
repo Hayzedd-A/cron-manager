@@ -1,3 +1,30 @@
+Cron Job Manager for Endpoint Pinging
+A robust cron job manager designed to keep free servers up and running by sending repeated GET requests to specified endpoints. This tool helps prevent servers from going inactive due to prolonged inactivity, ensuring they remain responsive and available.
+
+Key Features
+- User Account Management: Create an account to manage your services
+- Service Creation: Create up to 5 services per account, each with a customizable endpoint and ping interval
+- Service Monitoring: View detailed service information, including:
+    - Uptime and downtime statistics
+    - Current status (active or paused)
+    - Last ping timestamp and response time
+- Service Control: Pause or resume services as needed to manage your server's activity
+
+Use Cases
+- Keep free servers (e.g., Render) active and responsive by sending regular pings
+- Monitor and manage multiple services from a single dashboard
+- Easily pause or resume services to adapt to changing server needs
+
+Technical Details
+- Built with [Next.js, Typescript, MongoDB]
+- Utilizes cron jobs to schedule and manage repeated GET requests
+- Stores service data and user information in a secure database
+
+Getting Started
+1. Clone the repository and follow the setup instructions
+2. Create an account and start creating services
+3. Configure your services and monitor their status
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
